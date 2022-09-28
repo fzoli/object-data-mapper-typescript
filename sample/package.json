@@ -1,0 +1,24 @@
+{
+  "name": "sample",
+  "version": "0.1.0",
+  "description": "JSON object mapper - sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx ts-node main",
+    "linklib": "npm run --prefix ../packages/core build && npm link ../packages/core"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fzoli/object-data-mapper-typescript.git",
+    "directory": "sample"
+  },
+  "author": "Zoltan Farkas <progfarkas@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@object-data-mapper/core": "0.1.0"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
