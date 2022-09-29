@@ -1,0 +1,43 @@
+{
+  "name": "@object-data-mapper/moment",
+  "version": "0.1.0",
+  "description": "JSON object mapper - moment module",
+  "author": "Zoltan Farkas <progfarkas@gmail.com>",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "publish-lib": "npm run build && npm publish",
+    "publish-beta": "npm run build && npm publish --tag beta",
+    "publish-dryrun": "npm run build && npm publish --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fzoli/object-data-mapper-typescript.git",
+    "directory": "packages/moment"
+  },
+  "keywords": [
+    "typescript",
+    "json",
+    "mapper",
+    "moment"
+  ],
+  "bugs": {
+    "url": "https://github.com/fzoli/object-data-mapper-typescript/issues"
+  },
+  "homepage": "https://github.com/fzoli/object-data-mapper-typescript#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "typescript": "^4.2.3",
+    "moment": "~2.29.4",
+    "@object-data-mapper/core": "0.1.0"
+  }
+}
