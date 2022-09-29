@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import * as moment from 'moment';
+import { List } from 'immutable';
 import { Decimal } from 'decimal.js';
+import * as moment from 'moment';
 
 import { decodeObject, encodeObject, JsonField } from '@object-data-mapper/core';
-import { momentDecoder, momentEncoder } from '@object-data-mapper/moment';
+import { decodeList, emptyArray, emptyList, encodeList } from '@object-data-mapper/immutable';
 import { decimalDecoder, decimalEncoder } from '@object-data-mapper/decimal';
+import { momentDecoder, momentEncoder } from '@object-data-mapper/moment';
 
 export type Identity = number
 
@@ -64,18 +66,20 @@ export class User {
     readonly creationTime!: moment.Moment
 
     @JsonField({
-        decoder: value => decodeObject(value, Balance),
-        encoder: value => encodeObject(value, Balance)
+        defaultDecodedValue: emptyList,
+        defaultEncodedValue: emptyArray,
+        decoder: value => decodeList(value, item => decodeObject(item, Balance)),
+        encoder: value => encodeList(value, item => encodeObject(item, Balance))
     })
-    readonly balance!: Balance
+    readonly balances!: List<Balance>
 
 }
 
-const json = "{\"id\":1,\"person_name\":\"Person\",\"creation_time\":\"2022-01-01T12:30:00.500Z\",\"balance\":{\"amount\":\"15.123456\",\"currency_code\":\"EUR\"}}"
+const json = "{\"id\":1,\"person_name\":\"Person\",\"creation_time\":\"2022-01-01T12:30:00.500Z\",\"balances\":[{\"amount\":\"15.123456\",\"currency_code\":\"EUR\"}]}"
 const raw = JSON.parse(json)
 const user = decodeObject(raw, User)
 console.log(raw)
-console.log('id:', user.id, ', personName:', user.personName, ', level:', user.level, ', creationTime:', user.creationTime, ', balance.currencyCode:', user.balance.currencyCode, ', balance.amount:', user.balance.amount)
+console.log('id:', user.id, ', personName:', user.personName, ', level:', user.level, ', creationTime:', user.creationTime, ', balances[0].currencyCode:', user.balances.get(0).currencyCode, ', balances[0].amount:', user.balances.get(0).amount)
 const encoded = encodeObject(user)
 console.log(encoded)
 console.log('passed:', json === JSON.stringify(encoded))
