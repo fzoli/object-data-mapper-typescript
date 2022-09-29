@@ -14,11 +14,34 @@
  * limitations under the License.
  */
 
+import * as moment from 'moment';
+import { Decimal } from 'decimal.js';
+
 import { decodeObject, encodeObject, JsonField } from '@object-data-mapper/core';
 import { momentDecoder, momentEncoder } from '@object-data-mapper/moment';
-import * as moment from 'moment';
+import { decimalDecoder, decimalEncoder } from '@object-data-mapper/decimal';
 
 export type Identity = number
+
+export enum CurrencyCode {
+    EUR = 'EUR',
+    USD = 'USD',
+}
+
+export class Balance {
+
+    @JsonField({
+        decoder: decimalDecoder,
+        encoder: decimalEncoder
+    })
+    readonly amount!: Decimal
+
+    @JsonField({
+        name: 'currency_code'
+    })
+    readonly currencyCode!: CurrencyCode
+
+}
 
 export class User {
 
@@ -40,13 +63,19 @@ export class User {
     })
     readonly creationTime!: moment.Moment
 
+    @JsonField({
+        decoder: value => decodeObject(value, Balance),
+        encoder: value => encodeObject(value, Balance)
+    })
+    readonly balance!: Balance
+
 }
 
-const json = "{\"id\":1,\"person_name\":\"Person\",\"creation_time\":\"2022-01-01T12:30:00.500Z\"}"
+const json = "{\"id\":1,\"person_name\":\"Person\",\"creation_time\":\"2022-01-01T12:30:00.500Z\",\"balance\":{\"amount\":\"15.123456\",\"currency_code\":\"EUR\"}}"
 const raw = JSON.parse(json)
 const user = decodeObject(raw, User)
 console.log(raw)
-console.log('id:', user.id, ', personName:', user.personName, ', level:', user.level, ', creationTime:', user.creationTime)
+console.log('id:', user.id, ', personName:', user.personName, ', level:', user.level, ', creationTime:', user.creationTime, ', balance.currencyCode:', user.balance.currencyCode, ', balance.amount:', user.balance.amount)
 const encoded = encodeObject(user)
 console.log(encoded)
 console.log('passed:', json === JSON.stringify(encoded))
