@@ -15,7 +15,8 @@
   "author": "Zoltan Farkas <progfarkas@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@object-data-mapper/core": "0.1.0"
+    "@object-data-mapper/core": "0.1.0",
+    "@object-data-mapper/moment": "0.1.0"
   },
   "devDependencies": {
     "ts-node": "^9.1.1",
