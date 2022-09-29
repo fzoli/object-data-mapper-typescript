@@ -4,8 +4,7 @@
   "description": "JSON object mapper - sample",
   "main": "index.js",
   "scripts": {
-    "test": "npx ts-node main",
-    "linklib": "npm run --prefix ../packages/core build && npm link ../packages/core"
+    "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.test.ts'"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,10 @@
   },
   "devDependencies": {
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
+    "chai": "^4.3.3",
+    "mocha": "^10.0.0"
   }
 }
