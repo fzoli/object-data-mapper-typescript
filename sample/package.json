@@ -15,16 +15,17 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@object-data-mapper/core": "0.1.0",
-    "@object-data-mapper/moment": "0.1.0",
+    "@object-data-mapper/luxon": "0.1.0",
     "@object-data-mapper/decimal": "0.1.0",
     "@object-data-mapper/immutable": "0.1.0"
   },
   "devDependencies": {
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3",
     "@types/chai": "^4.3.3",
+    "@types/luxon": "^3.0.1",
     "@types/mocha": "^10.0.0",
     "chai": "^4.3.3",
-    "mocha": "^10.0.0"
+    "mocha": "^10.0.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
   }
 }

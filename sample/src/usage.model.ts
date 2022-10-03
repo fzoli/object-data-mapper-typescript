@@ -1,11 +1,11 @@
 import { List } from 'immutable';
 import { Decimal } from 'decimal.js';
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 
 import { decodeObject, encodeObject, JsonField } from '@object-data-mapper/core';
 import { decodeList, emptyArray, emptyList, encodeList } from '@object-data-mapper/immutable';
 import { decimalDecoder, decimalEncoder } from '@object-data-mapper/decimal';
-import { momentDecoder, momentEncoder } from '@object-data-mapper/moment';
+import { dateTimeDecoder, dateTimeEncoder } from '@object-data-mapper/luxon';
 
 export type Identity = number
 
@@ -44,10 +44,10 @@ export class User {
 
     @JsonField({
         name: 'creation_time',
-        decoder: momentDecoder,
-        encoder: momentEncoder
+        decoder: dateTimeDecoder,
+        encoder: dateTimeEncoder
     })
-    readonly creationTime!: moment.Moment
+    readonly creationTime!: DateTime
 
     @JsonField({
         defaultDecodedValue: emptyList,

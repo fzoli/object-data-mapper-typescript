@@ -15,7 +15,7 @@ describe('Object mapper library', () => {
         expect(user.id).to.equal(1)
         expect(user.personName).to.equal("Person")
         expect(user.level).to.undefined
-        expect(user.creationTime.toISOString()).to.equal("2022-01-01T12:30:00.500Z")
+        expect(user.creationTime.toUTC().toISO()).to.equal("2022-01-01T12:30:00.500Z")
         expect(user.balances.size).to.equal(1)
         expect(user.balances.get(0).currencyCode).to.equal(CurrencyCode.EUR)
         expect(user.balances.get(0).amount.toNumber()).to.equal(15.123456)
